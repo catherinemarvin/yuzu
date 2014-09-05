@@ -1,9 +1,24 @@
 doctype html
 html(lang="en")
   head
-    title Index
+    meta(charset="utf-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    meta(name="description" content="")
+    meta(name="author" content="Kevin Hwang")
+
+    title Yuzu
     link(href="css/bootstrap.min.css", rel="stylesheet")
 
   body
-    h1 Hello world!
+    div(class="navbar navbar-inverse navbar-fixed-top" role="navigation")
+      .container
+        .navbar-header
+          a(href="#") Yuzu
+
+    .jumbotron
+      .container
+        h1 Hello, world!
+        p Simple template!
+        p
+          a(class="btn btn-primary btn-lg" role="button") Learn more
 
