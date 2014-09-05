@@ -1,0 +1,23 @@
+{
+  "name": "yuzu",
+  "version": "0.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/khwang/yuzu.git"
+  },
+  "author": "Kevin Hwang",
+  "license": "BSD",
+  "bugs": {
+    "url": "https://github.com/khwang/yuzu/issues"
+  },
+  "dependencies": {
+    "express": "~4.8.7",
+    "jade": "~1.6.0"
+  }
+}
