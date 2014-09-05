@@ -19,6 +19,7 @@
   "dependencies": {
     "express": "~4.8.7",
     "jade": "~1.6.0",
+    "mongodb": "^1.4.10",
     "socket.io": "^1.1.0"
   }
 }
