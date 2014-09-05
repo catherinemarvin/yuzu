@@ -22,6 +22,15 @@ html(lang="en")
         p
           a(class="btn btn-primary btn-lg" role="button") Learn more
     .container
-      p Play the game
+      .row
+        .span12
+          h2 Play now!
+          form(action="/join", method="get")
+            label Username
+              input(type="text" id="username")
+            label Create/Join Room
+              input(type="text" id="roomId")
+            button(name="button" class="btn") Go
+
       hr
       p &copy; Kevin Hwang 2014
