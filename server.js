@@ -35,7 +35,12 @@ app.get("/room/:id", function (req, res) {
   var roomId = req.params.name;
 });
 
-app.post("/create", function (req, res) {
+app.get("/join", function (req, res) {
+  console.log("Join");
+  var username = req.param("username");
+  var roomId = req.query.roomId;
+  console.log(username);
+  console.log(roomId);
   // Create a new room
 });
 
