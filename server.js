@@ -6,6 +6,12 @@ var io = require("socket.io")(server);
 
 
 // Database setup
+var redis = require("redis");
+var client = redis.createClient();
+
+client.on("error", function (err) {
+  console.log("Error " + err);
+});
 
 // Configuration
 app.use(express.static(__dirname+ "/static"));
@@ -22,7 +28,9 @@ app.get("/", function (req, res) {
 app.get("/join", function (req, res) {
   var username = req.query.username;
   var roomId = req.query.roomId;
-  res.render("room", { roomId: roomId });
+
+  client.sadd(roomId, username);
+  res.render("room", { roomId: roomId, username: username });
 });
 
 server.listen(3000, function () {
