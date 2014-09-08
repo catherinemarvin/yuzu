@@ -36,7 +36,7 @@ app.get("/", function (req, res) {
 app.get("/join", function (req, res) {
   var username = req.query.username;
   var roomId = req.query.roomId;
-  res.render("room");
+  res.render("room", { roomId: roomId });
 });
 
 server.listen(3000, function () {
