@@ -40,7 +40,15 @@ server.listen(3000, function () {
 // SocketIO
 
 io.on("connection", function (socket) {
-  socket.on("room", function (room) {
+  socket.on("room", function (info) {
+    var room = info.roomId;
+    var username = info.username;
+
     socket.join(room);
+    client.set(socket.id, username);
+  });
+
+  socket.on("disconnect", function () {
+    client.del(socket.id);
   });
 });

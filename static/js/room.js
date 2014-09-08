@@ -1,9 +1,9 @@
 // Socket IO
 var socket = io.connect("http://localhost:3000");
 
-// roomId is passed in from server.js
+// roomId and username are passed in from server.js
 socket.on("connect", function () {
-  socket.emit("room", roomId);
+  socket.emit("room", { roomId: roomId, username: username });
 });
 
 // Cross browser compatibility
