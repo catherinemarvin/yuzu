@@ -36,12 +36,8 @@ app.get("/room/:id", function (req, res) {
 });
 
 app.get("/join", function (req, res) {
-  console.log("Join");
-  var username = req.param("username");
+  var username = req.query.username;
   var roomId = req.query.roomId;
-  console.log(username);
-  console.log(roomId);
-  // Create a new room
 });
 
 var server = app.listen(3000, function () {
