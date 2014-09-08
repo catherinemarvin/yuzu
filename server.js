@@ -30,14 +30,10 @@ app.get("/", function (req, res) {
   res.render("index");
 });
 
-app.get("/room/:id", function (req, res) {
-  // Enter a room with the given name
-  var roomId = req.params.name;
-});
-
 app.get("/join", function (req, res) {
   var username = req.query.username;
   var roomId = req.query.roomId;
+  res.render("room");
 });
 
 var server = app.listen(3000, function () {
