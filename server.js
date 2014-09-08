@@ -7,20 +7,6 @@ var io = require("socket.io")(server);
 
 // Database setup
 
-var mongo = require("mongodb");
-
-var MongoClient = mongo.MongoClient;
-
-var roomsCollection;
-
-MongoClient.connect("mongodb://localhost:27017/yuzu", function (err, db) {
-  if (err) {
-    throw err;
-  } else {
-    roomsCollection = db.collection("rooms");
-  }
-});
-
 // Configuration
 app.use(express.static(__dirname+ "/static"));
 
