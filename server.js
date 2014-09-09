@@ -29,7 +29,6 @@ app.get("/join", function (req, res) {
   var username = req.query.username;
   var roomId = req.query.roomId;
 
-  client.sadd(roomId, username);
   res.render("room", { roomId: roomId, username: username });
 });
 
