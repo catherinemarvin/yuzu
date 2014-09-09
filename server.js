@@ -45,9 +45,26 @@ io.on("connection", function (socket) {
 
     socket.join(room);
     client.set(socket.id, username);
+
+    emitPlayers(socket, room);
   });
 
   socket.on("disconnect", function () {
     client.del(socket.id);
   });
 });
+
+var emitPlayers = function (socket, roomId) {
+  // Get list of all sockets in the room
+  var sockets = [];
+
+  var playerNames = [client.get(socket.id)];
+
+  for (var i = 0; i < sockets.length; i++) {
+    var player = sockets[i];
+    if (player !== socket) {
+      playerNames.push(client.get(player.id));
+    }
+  }
+  socket.emit("playerList", playerNames);
+};

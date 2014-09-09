@@ -6,6 +6,10 @@ socket.on("connect", function () {
   socket.emit("room", { roomId: roomId, username: username });
 });
 
+socket.on("playerList", function (playerNames) {
+  // Append the list of players to #players
+});
+
 // Cross browser compatibility
 navigator.getUserMedia = (navigator.getUserMedia || 
     navigator.webkitGetUserMedia ||
