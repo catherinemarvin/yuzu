@@ -7,6 +7,7 @@ socket.on("connect", function () {
 });
 
 socket.on("playerList", function (playerNames) {
+  console.log(playerNames);
   // Append the list of players to #players
 });
 

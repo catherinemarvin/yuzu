@@ -55,16 +55,16 @@ io.on("connection", function (socket) {
 });
 
 var emitPlayers = function (socket, roomId) {
-  // Get list of all sockets in the room
-  var sockets = [];
+  var sockets = io.sockets.adapter.rooms[roomId];
 
-  var playerNames = [client.get(socket.id)];
+  var playerNames = [];
+  var socketIds = [];
 
-  for (var i = 0; i < sockets.length; i++) {
-    var player = sockets[i];
-    if (player !== socket) {
-      playerNames.push(client.get(player.id));
-    }
+  for (var socketId in sockets) {
+    socketIds.push(socketId); // sockets is technically not an array.
   }
-  socket.emit("playerList", playerNames);
+
+  client.mget(socketIds, function (err, names) {
+    socket.emit("playerList", names);
+  });
 };
