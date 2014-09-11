@@ -7,7 +7,6 @@ socket.on("connect", function () {
 });
 
 socket.on("playerList", function (playerNames) {
-  console.log(playerNames);
   var players = document.querySelector("#players");
   players.textContent = playerNames;
 });

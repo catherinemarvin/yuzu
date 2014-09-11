@@ -57,14 +57,7 @@ io.on("connection", function (socket) {
 var emitPlayers = function (socket, roomId) {
   var sockets = io.sockets.adapter.rooms[roomId];
 
-  var playerNames = [];
-  var socketIds = [];
-
-  for (var socketId in sockets) {
-    socketIds.push(socketId); // sockets is technically not an array.
-  }
-
-  client.mget(socketIds, function (err, names) {
+  client.mget(Object.keys(sockets), function (err, names) {
     socket.emit("playerList", names);
   });
 };
