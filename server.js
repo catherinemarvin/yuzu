@@ -46,7 +46,7 @@ io.on("connection", function (socket) {
     socket.join(room);
     client.set(socket.id, username);
 
-    emitPlayers(socket, room);
+    emitPlayers(room);
   });
 
   socket.on("disconnect", function () {
@@ -54,10 +54,26 @@ io.on("connection", function (socket) {
   });
 });
 
-var emitPlayers = function (socket, roomId) {
+var emitPlayers = function (roomId) {
   var sockets = io.sockets.adapter.rooms[roomId];
 
   client.mget(Object.keys(sockets), function (err, names) {
-    socket.emit("playerList", names);
+    var clients = socketsInRoom(roomId);
+
+    for (var i = 0; i < clients.length; i++) {
+      var socket = clients[i];
+      socket.emit("playerList", names);
+    }
   });
+};
+
+var socketsInRoom = function (roomId) {
+  var sockets = io.sockets.adapter.rooms[roomId];
+
+  var ret = [];
+
+  for (var socketId in sockets) {
+    ret.push(io.sockets.adapter.nsp.connected[socketId]);
+  }
+  return ret;
 };
