@@ -47,7 +47,6 @@ MediaStreamTrack.getSources(function (sourceInfos) {
   for (var i = 0; i < sourceInfos.length; i++) {
     var sourceInfo = sourceInfos[i];
     if (sourceInfo.kind === "video") {
-      console.log(sourceInfo.id, sourceInfo.label || "camera");
       videoSource = sourceInfo.id;
     }
   }
