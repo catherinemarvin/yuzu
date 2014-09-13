@@ -11,6 +11,9 @@ socket.on("playerList", function (playerNames) {
   players.textContent = playerNames;
 });
 
+socket.on("startGame", function () {
+});
+
 // Cross browser compatibility
 navigator.getUserMedia = (navigator.getUserMedia || 
     navigator.webkitGetUserMedia ||
@@ -62,5 +65,13 @@ MediaStreamTrack.getSources(function (sourceInfos) {
     localMediaStream = stream;
   }, function (e) {
     console.log("Error :(", e );
+  });
+});
+
+// jQuery
+
+$(document).ready(function () {
+  $("#startBtn").click(function () {
+    // Start game
   });
 });
