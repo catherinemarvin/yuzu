@@ -18,20 +18,21 @@ html(lang="en")
 
     .container
       .row
-        .span8
+        .col-md-12
           h2 Welcome!
           video(id="video", autoplay)
           img(id="screenshot")
           canvas(style="display:none;")
-        .span4
+      .row
+        .col-md-12
           h3 Players
           #players
       .row
-        .span12
+        .col-md-12
           button(id="startBtn" class="btn") Start game!
 
       .row
-        .span12
+        .col-md-12
           #gameInfo
 
       hr
