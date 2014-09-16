@@ -12,7 +12,20 @@ socket.on("playerList", function (playerNames) {
 });
 
 socket.on("startGame", function () {
-  $("#gameInfo").text("Game has started!");
+  $("#gameInfo").text("Game has started! Get ready to make a stupid face!");
+  var seconds = 3;
+
+  var timer = function () {
+    if (seconds === 0) {
+      $("#gameInfo").text("Snap!");
+    } else {
+      $("#gameInfo").text(seconds + " seconds remaining");
+      seconds--;
+      window.setTimeout(timer, 1000);
+    }
+  };
+
+  window.setTimeout(timer, 1000);
 });
 
 // Cross browser compatibility
