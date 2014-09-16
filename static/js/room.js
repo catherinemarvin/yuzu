@@ -12,6 +12,7 @@ socket.on("playerList", function (playerNames) {
 });
 
 socket.on("startGame", function () {
+  console.log("Start game");
 });
 
 // Cross browser compatibility
@@ -72,6 +73,6 @@ MediaStreamTrack.getSources(function (sourceInfos) {
 
 $(document).ready(function () {
   $("#startBtn").click(function () {
-    // Start game
+    socket.emit("roomStart", roomId);
   });
 });

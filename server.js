@@ -53,6 +53,14 @@ io.on("connection", function (socket) {
     emitPlayers(room);
   });
 
+  socket.on("roomStart", function (roomId) {
+    var sockets = socketsInRoom(roomId);
+    for (var i = 0; i < sockets.length; i++) {
+      var socket = sockets[i];
+      socket.emit("startGame");
+    }
+  });
+
   socket.on("disconnect", function () {
     client.del(socket.id);
 
