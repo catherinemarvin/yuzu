@@ -12,7 +12,7 @@ socket.on("playerList", function (playerNames) {
 });
 
 socket.on("startGame", function () {
-  console.log("Start game");
+  $("#gameInfo").text("Game has started!");
 });
 
 // Cross browser compatibility
