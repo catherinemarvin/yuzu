@@ -61,6 +61,10 @@ io.on("connection", function (socket) {
     }
   });
 
+  socket.on("chat", function (message) {
+    console.log(message);
+  });
+
   socket.on("disconnect", function () {
     client.del(socket.id);
 

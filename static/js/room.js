@@ -88,4 +88,10 @@ $(document).ready(function () {
   $("#startBtn").click(function () {
     socket.emit("roomStart", roomId);
   });
+
+  $("#chatForm").submit(function () {
+    socket.emit("chat", $("#message").val());
+    $("#message").val("");
+    return false;
+  });
 });
