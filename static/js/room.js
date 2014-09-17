@@ -61,7 +61,13 @@ var snapshot = function () {
 };
 
 var upload = function () {
-  var imageData = canvas.toDataURL("image/webp");
+  var imageData;
+
+  try {
+    imageData = canvas.toDataURL("image/png").split(",")[1];
+  } catch (e) {
+    imageData = canvas.toDataURL().split(",")[1];
+  }
 
   $.ajax({
     url: "https://api.imgur.com/3/image",
@@ -73,8 +79,9 @@ var upload = function () {
       image: imageData
     },
     dataType: "json",
-    success: function (data) {
-      console.log(data);
+    success: function (info) {
+      var image = info.data;
+      var link = info.link;
     },
     error: function (jqXHR, textStatus, errorThrown) {
       console.log("Error :(");
