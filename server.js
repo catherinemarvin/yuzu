@@ -61,8 +61,10 @@ io.on("connection", function (socket) {
     }
   });
 
-  socket.on("chat", function (message) {
-    console.log(message);
+  socket.on("chat", function (info) {
+    var room = info.room;
+    var message = info.message;
+    io.to(room).emit("chatMessage", message);
   });
 
   socket.on("disconnect", function () {

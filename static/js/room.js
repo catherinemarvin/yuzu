@@ -28,6 +28,10 @@ socket.on("startGame", function () {
   window.setTimeout(timer, 1000);
 });
 
+socket.on("chatMessage", function (message) {
+  $("#chat").append(message);
+});
+
 // Cross browser compatibility
 navigator.getUserMedia = (navigator.getUserMedia || 
     navigator.webkitGetUserMedia ||
@@ -90,7 +94,7 @@ $(document).ready(function () {
   });
 
   $("#chatForm").submit(function () {
-    socket.emit("chat", $("#message").val());
+    socket.emit("chat", { room: roomId, message: $("#message").val() });
     $("#message").val("");
     return false;
   });
