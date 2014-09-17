@@ -18,6 +18,7 @@ socket.on("startGame", function () {
   var timer = function () {
     if (seconds === 0) {
       $("#gameInfo").text("Snap!");
+      snapshot();
     } else {
       $("#gameInfo").text(seconds + " seconds remaining");
       seconds--;
@@ -52,7 +53,7 @@ var localMediaStream = null;
 var snapshot = function () {
   if (localMediaStream) {
     ctx.drawImage(video, 0, 0);
-    img.src = canvas.toDataURL("image/png");
+    img.src = canvas.toDataURL("image/webp");
   }
 };
 
@@ -62,8 +63,6 @@ video.onloadedmetadata = function (e) {
   img.width = video.videoWidth;
   img.height = video.videoheight;
 };
-
-video.addEventListener("click", snapshot, false);
 
 MediaStreamTrack.getSources(function (sourceInfos) {
 
