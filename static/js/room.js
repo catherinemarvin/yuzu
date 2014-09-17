@@ -66,8 +66,8 @@ var upload = function () {
   $.ajax({
     url: "https://api.imgur.com/3/image",
     type: "POST",
-    beforeSend: function (xhr) {
-      xhr.setRequestHeader("Authorization", "Client ID " + IMGUR_CLIENT_ID);
+    headers: {
+      Authorization: "Client-ID " + IMGUR_CLIENT_ID
     },
     data: {
       image: imageData
