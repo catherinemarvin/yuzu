@@ -7,3 +7,10 @@ body {
   height: 250px;
 }
 
+#chat {
+  list-style-type: none;
+}
+
+#chat li:nth-child(odd) {
+  background: #eee;
+}

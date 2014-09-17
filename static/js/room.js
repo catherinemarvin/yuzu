@@ -28,8 +28,10 @@ socket.on("startGame", function () {
   window.setTimeout(timer, 1000);
 });
 
-socket.on("chatMessage", function (message) {
-  $("#chat").append(message);
+socket.on("chatMessage", function (messageInfo) {
+  var message = messageInfo.message;
+  var sender = messageInfo.sender;
+  $("#chat").append($("<li>").text(sender + ": " + message));
 });
 
 // Cross browser compatibility

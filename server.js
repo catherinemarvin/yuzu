@@ -64,7 +64,10 @@ io.on("connection", function (socket) {
   socket.on("chat", function (info) {
     var room = info.room;
     var message = info.message;
-    io.to(room).emit("chatMessage", message);
+
+    client.get(socket.id, function (err, username) {
+      io.to(room).emit("chatMessage", { sender: username, message: message });
+    });
   });
 
   socket.on("disconnect", function () {
