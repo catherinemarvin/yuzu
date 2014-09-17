@@ -1,3 +1,5 @@
+var IMGUR_CLIENT_ID = "33a3250135d2053";
+
 // Socket IO
 var socket = io.connect("http://localhost:3000");
 
@@ -54,7 +56,32 @@ var snapshot = function () {
   if (localMediaStream) {
     ctx.drawImage(video, 0, 0);
     img.src = canvas.toDataURL("image/webp");
+    upload();
   }
+};
+
+var upload = function () {
+  var imageData = canvas.toDataURL("image/webp");
+
+  $.ajax({
+    url: "https://api.imgur.com/3/image",
+    type: "POST",
+    beforeSend: function (xhr) {
+      xhr.setRequestHeader("Authorization", "Client ID " + IMGUR_CLIENT_ID);
+    },
+    data: {
+      image: imageData
+    },
+    dataType: "json",
+    success: function (data) {
+      console.log(data);
+    },
+    error: function (jqXHR, textStatus, errorThrown) {
+      console.log("Error :(");
+      console.log(textStatus);
+      console.log(errorThrown);
+    }
+  });
 };
 
 video.onloadedmetadata = function (e) {
