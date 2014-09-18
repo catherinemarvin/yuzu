@@ -58,6 +58,9 @@ io.on("connection", function (socket) {
     for (var i = 0; i < sockets.length; i++) {
       var socket = sockets[i];
       socket.emit("startGame");
+      console.log("starting game");
+      console.log(roomId);
+      client.sadd(roomId, socket.id);
     }
   });
 
@@ -67,6 +70,19 @@ io.on("connection", function (socket) {
 
     client.get(socket.id, function (err, username) {
       io.to(room).emit("chatMessage", { sender: username, message: message });
+    });
+  });
+
+  socket.on("snapshotTaken", function (info) {
+    console.log("Pic taken!");
+    var roomId = info.roomId;
+    var username = info.player;
+    client.smembers(roomId, function (err, socketIds) {
+      console.log(socketIds);
+      if (socketIds.length == 1) {
+        io.to(roomId).emit("showPictures");
+      }
+      client.srem(roomId, socket.id);
     });
   });
 

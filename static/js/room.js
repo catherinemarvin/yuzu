@@ -31,6 +31,10 @@ socket.on("startGame", function () {
   window.setTimeout(timer, 1000);
 });
 
+socket.on("showPictures", function () {
+  console.log("Pics here!");
+});
+
 socket.on("chatMessage", function (messageInfo) {
   var message = messageInfo.message;
   var sender = messageInfo.sender;
@@ -82,6 +86,7 @@ var upload = function () {
     success: function (info) {
       var image = info.data;
       var link = info.link;
+      socket.emit("snapshotTaken", { roomId: roomId, url: link, player: username });
     },
     error: function (jqXHR, textStatus, errorThrown) {
       console.log("Error :(");
