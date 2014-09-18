@@ -31,8 +31,9 @@ socket.on("startGame", function () {
   window.setTimeout(timer, 1000);
 });
 
-socket.on("showPictures", function () {
+socket.on("showPictures", function (pictures) {
   console.log("Pics here!");
+  console.log(pictures);
 });
 
 socket.on("chatMessage", function (messageInfo) {
@@ -85,7 +86,7 @@ var upload = function () {
     dataType: "json",
     success: function (info) {
       var image = info.data;
-      var link = info.link;
+      var link = image.link;
       socket.emit("snapshotTaken", { roomId: roomId, url: link, player: username });
     },
     error: function (jqXHR, textStatus, errorThrown) {
