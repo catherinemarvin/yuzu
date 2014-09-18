@@ -72,7 +72,6 @@ io.on("connection", function (socket) {
   });
 
   socket.on("snapshotTaken", function (info) {
-    console.log("Pic taken!");
     var roomId = info.roomId;
     var username = info.player;
     var imageUrl = info.url;
@@ -81,6 +80,7 @@ io.on("connection", function (socket) {
       client.sadd(roomId + "pictures", imageUrl);
       if (socketIds.length === 1) {
         client.smembers(roomId + "pictures", function (err, pictures) {
+          client.srem(roomId + "pictures", pictures);
           io.to(roomId).emit("showPictures", pictures);
         });
       }
@@ -101,6 +101,7 @@ io.on("connection", function (socket) {
         var players = socketsInRoom(socketOrRoomId);
         if (players.length === 0) {
           client.srem(ROOMS_KEY,socketOrRoomId);
+          client.srem(socketOrRoomId, socket.id);
         }
       }
     }
