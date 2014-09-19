@@ -32,6 +32,7 @@ socket.on("startGame", function () {
 });
 
 socket.on("showPictures", function (pictures) {
+  console.log(pictures);
 });
 
 socket.on("chatMessage", function (messageInfo) {

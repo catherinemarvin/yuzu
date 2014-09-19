@@ -78,10 +78,23 @@ io.on("connection", function (socket) {
     client.smembers(roomId, function (err, socketIds) {
       client.srem(roomId, socket.id);
       client.sadd(roomId + "pictures", imageUrl);
+      client.set(imageUrl, socket.id);
       if (socketIds.length === 1) {
         client.smembers(roomId + "pictures", function (err, pictures) {
           client.srem(roomId + "pictures", pictures);
-          io.to(roomId).emit("showPictures", pictures);
+
+          client.mget(pictures, function (err, socketIds) {
+            client.mget(socketIds, function (err, usernames) {
+              var response = [];
+              for (var i = 0; i < usernames.length; i++) {
+                var picture = pictures[i];
+                var user = usernames[i];
+                client.del(picture);
+                response.push({ picture: picture, user: user });
+              }
+              io.to(roomId).emit("showPictures", response);
+            });
+          });
         });
       }
     });
