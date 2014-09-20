@@ -33,6 +33,14 @@ socket.on("startGame", function () {
 
 socket.on("showPictures", function (pictures) {
   console.log(pictures);
+  for (var i = 0; i < pictures.length; i++) {
+    var picInfo = pictures[i];
+    var imageUrl = picInfo.picture;
+    var submitter = picInfo.user;
+
+    $("#pictures").append("<img src='"+imageUrl+"'></img>");
+  }
+
 });
 
 socket.on("chatMessage", function (messageInfo) {
