@@ -65,6 +65,8 @@ var videoSource = null;
 var localMediaStream = null;
 
 var snapshot = function () {
+  $("#video").hide();
+  $("#screenshot").show();
   if (localMediaStream) {
     ctx.drawImage(video, 0, 0);
     img.src = canvas.toDataURL("image/webp");

@@ -7,6 +7,10 @@ body {
   height: 250px;
 }
 
+#screenshot {
+  display: none;
+}
+
 #chat {
   list-style-type: none;
 }
