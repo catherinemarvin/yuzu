@@ -100,6 +100,12 @@ io.on("connection", function (socket) {
     });
   });
 
+  socket.on("voteSubmitted", function (info) {
+    var roomId = info.roomId;
+    var username = info.player;
+    var imageUrl = info.url;
+  });
+
   socket.on("disconnect", function () {
     client.del(socket.id);
 

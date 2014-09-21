@@ -42,10 +42,15 @@ socket.on("showPictures", function (pictures) {
     if (submitter === username) {
       continue;
     } else {
-      console.log("Yeah!");
-      $("#pictures").append("<img data-username='"+submitter+"' src='"+imageUrl+"'></img>");
+      $("#pictures").append("<img class='picture' data-username='"+submitter+"' src='"+imageUrl+"'></img>");
     }
   }
+  
+  $(".picture").click(function () {
+    console.log("Cast a vote!");
+    var username = $(this).data("username");
+    console.log(username);
+  });
 });
 
 socket.on("chatMessage", function (messageInfo) {
