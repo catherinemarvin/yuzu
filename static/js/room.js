@@ -40,7 +40,7 @@ socket.on("showPictures", function (pictures) {
     var submitter = picInfo.user;
 
     if (submitter === username) {
-      return;
+      continue;
     } else {
       console.log("Yeah!");
       $("#pictures").append("<img data-username='"+submitter+"' src='"+imageUrl+"'></img>");
