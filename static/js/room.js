@@ -51,16 +51,18 @@ socket.on("showPictures", function (pictures) {
     }
   }
   
+  var voted = false;
   $(".picture").click(function () {
-    console.log("Cast a vote!");
-    var username = $(this).data("username");
+    if (!voted) {
+      voted = true;
+      var username = $(this).data("username");
 
-    socket.emit("voteSubmitted", {
-      roomId: roomId,
-      player: username,
-      imageUrl: this.src
-    });
-    $(".picture").hide();
+      socket.emit("voteSubmitted", {
+        roomId: roomId,
+        player: username,
+        imageUrl: this.src
+      });
+    }
   });
 });
 
