@@ -1,7 +1,7 @@
 var IMGUR_CLIENT_ID = "33a3250135d2053";
 
 // Socket IO
-var socket = io.connect("http://localhost:3000");
+var socket = io();
 
 // roomId and username are passed in from server.js
 socket.on("connect", function () {
@@ -37,8 +37,6 @@ socket.on("startGame", function (image) {
 });
 
 socket.on("showPictures", function (pictures) {
-  console.log(pictures);
-
   for (var i = 0; i < pictures.length; i++) {
     var picInfo = pictures[i];
     var imageUrl = picInfo.picture;
