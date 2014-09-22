@@ -13,7 +13,7 @@ socket.on("playerList", function (playerNames) {
   players.textContent = playerNames;
 });
 
-socket.on("startGame", function () {
+socket.on("startGame", function (image) {
   $("#gameInfo").text("Game has started! Get ready to make a stupid face!");
   var seconds = 3;
 

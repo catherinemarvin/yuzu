@@ -4,6 +4,7 @@ var app = express();
 var server = require("http").Server(app);
 var io = require("socket.io")(server);
 
+var fs = require("fs");
 
 // Database setup
 var redis = require("redis");
@@ -54,12 +55,22 @@ io.on("connection", function (socket) {
   });
 
   socket.on("roomStart", function (roomId) {
-    var sockets = socketsInRoom(roomId);
-    for (var i = 0; i < sockets.length; i++) {
-      var socket = sockets[i];
-      socket.emit("startGame");
-      client.sadd(roomId, socket.id);
-    }
+    fs.readdir("static/images/", function (err, files) {
+      console.log(files);
+      var pictures = files.filter(function (file) {
+        return file.substr(file.lastIndexOf(".") + 1) === "png";
+      });
+
+      var image = pictures[Math.floor(Math.random() * pictures.length)];
+      console.log(image);
+
+      var sockets = socketsInRoom(roomId);
+      for (var i = 0; i < sockets.length; i++) {
+        var socket = sockets[i];
+        socket.emit("startGame", image);
+        client.sadd(roomId, socket.id);
+      }
+    });
   });
 
   socket.on("chat", function (info) {
