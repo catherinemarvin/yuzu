@@ -16,7 +16,7 @@ socket.on("playerList", function (playerNames) {
 socket.on("startGame", function (image) {
   $("#gameInfo").text("Game has started! Get ready to make a stupid face!");
 
-  $("#sourceImage").append("<img id=sourceImage src='images/"+image+"'></img>");
+  $("#sourceImage").append("<img id=sourceImage src='"+image+"'></img>");
 
 
   var seconds = 3;

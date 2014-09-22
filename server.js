@@ -66,6 +66,8 @@ io.on("connection", function (socket) {
 
       var image = pictures[Math.floor(Math.random() * pictures.length)];
 
+      image = "images/ragefaces/"+image;
+
       var sockets = socketsInRoom(roomId);
       for (var i = 0; i < sockets.length; i++) {
         var socket = sockets[i];
