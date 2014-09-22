@@ -119,6 +119,15 @@ io.on("connection", function (socket) {
     var roomId = info.roomId;
     var username = info.player;
     var imageUrl = info.url;
+
+    client.incr(roomId + "votes", function (err, res) {
+      var numPlayers = socketsInRoom(roomId).length;
+      if (res === numPlayers) {
+        console.log("Enough votes!");
+      } else {
+        console.log(res);
+      }
+    });
   });
 
   socket.on("disconnect", function () {

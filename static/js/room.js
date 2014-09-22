@@ -53,7 +53,12 @@ socket.on("showPictures", function (pictures) {
   $(".picture").click(function () {
     console.log("Cast a vote!");
     var username = $(this).data("username");
-    console.log(username);
+
+    socket.emit("voteSubmitted", {
+      roomId: roomId,
+      username: username,
+      imageUrl: this.src
+    });
   });
 });
 
