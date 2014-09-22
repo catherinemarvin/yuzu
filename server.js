@@ -59,7 +59,7 @@ io.on("connection", function (socket) {
   });
 
   socket.on("roomStart", function (roomId) {
-    fs.readdir("static/images/", function (err, files) {
+    fs.readdir("static/images/ragefaces", function (err, files) {
       var pictures = files.filter(function (file) {
         return file.substr(file.lastIndexOf(".") + 1) === "png";
       });
