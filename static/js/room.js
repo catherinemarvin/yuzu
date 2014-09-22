@@ -14,6 +14,7 @@ socket.on("playerList", function (playerNames) {
 });
 
 socket.on("startGame", function (image) {
+  $("#startBtn").hide();
   $("#gameInfo").text("Game has started! Get ready to make a stupid face!");
 
   $("#sourceImage").append("<img id=sourceImage src='"+image+"'></img>");
@@ -59,12 +60,27 @@ socket.on("showPictures", function (pictures) {
       player: username,
       imageUrl: this.src
     });
-    $(this).hide();
+    $(".picture").hide();
   });
 });
 
 socket.on("finalResults", function (results) {
-  console.log(results);
+  var topScore = results[0].votes;
+
+  var winners = results.filter(function (result) {
+    return result.votes === topScore;
+  });
+
+
+  $("#gameInfo").html("<h2>Winners</h2>");
+
+  for (var i = 0; i < winners.length; i++) {
+    var result = results[i];
+    var name = result.name;
+    var url = result.url;
+
+    $("#gameInfo").append("<br>"+name);
+  }
 });
 
 socket.on("chatMessage", function (messageInfo) {

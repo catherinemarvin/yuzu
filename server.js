@@ -122,9 +122,7 @@ io.on("connection", function (socket) {
     var imageUrl = info.url;
 
     client.incr(roomId + "votes", function (err, res) {
-      console.log(res);
       client.incr(username + "votes", function (err, votes) {
-        console.log(votes);
         var numPlayers = socketsInRoom(roomId).length;
         console.log(numPlayers);
         if (res === numPlayers) {
