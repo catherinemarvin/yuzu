@@ -191,6 +191,27 @@ var tallyVotes = function (roomId) {
     });
     client.mget(voteKeys, function (err, votes) {
       console.log(votes);
+
+      var final = [];
+      for (var i = 0; i < votes.length; i++) {
+        var username = names[i];
+        var numVotes = votes[i];
+
+        final.push({ name: username, votes: numVotes });
+      }
+
+      final.sort(function (a, b) {
+        if (a.votes < b.votes) {
+          return -1;
+        } else if (a.votes === b.votes) {
+          return 0;
+        } else {
+          return 1;
+        }
+      });
+
+      io.to(roomId).emit("finalResults", final);
+      client.del(voteKeys);
     });
   });
 };

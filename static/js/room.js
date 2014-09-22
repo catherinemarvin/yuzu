@@ -62,6 +62,10 @@ socket.on("showPictures", function (pictures) {
   });
 });
 
+socket.on("finalResults", function (results) {
+  console.log(results);
+});
+
 socket.on("chatMessage", function (messageInfo) {
   var message = messageInfo.message;
   var sender = messageInfo.sender;
