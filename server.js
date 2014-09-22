@@ -28,6 +28,10 @@ app.get("/", function (req, res) {
   res.render("index");
 });
 
+app.get("/about", function (req, res) {
+  res.render("about");
+});
+
 app.get("/join", function (req, res) {
   var username = req.query.username;
   var roomId = req.query.roomId;
