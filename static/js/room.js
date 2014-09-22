@@ -59,6 +59,7 @@ socket.on("showPictures", function (pictures) {
       player: username,
       imageUrl: this.src
     });
+    $(this).hide();
   });
 });
 
