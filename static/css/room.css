@@ -18,3 +18,8 @@ body {
 #chat li:nth-child(odd) {
   background: #eee;
 }
+
+#sourceImage {
+  max-height: 500px;
+  max-width: 500px;
+}

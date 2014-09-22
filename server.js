@@ -56,13 +56,11 @@ io.on("connection", function (socket) {
 
   socket.on("roomStart", function (roomId) {
     fs.readdir("static/images/", function (err, files) {
-      console.log(files);
       var pictures = files.filter(function (file) {
         return file.substr(file.lastIndexOf(".") + 1) === "png";
       });
 
       var image = pictures[Math.floor(Math.random() * pictures.length)];
-      console.log(image);
 
       var sockets = socketsInRoom(roomId);
       for (var i = 0; i < sockets.length; i++) {
