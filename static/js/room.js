@@ -56,7 +56,7 @@ socket.on("showPictures", function (pictures) {
 
     socket.emit("voteSubmitted", {
       roomId: roomId,
-      username: username,
+      player: username,
       imageUrl: this.src
     });
   });

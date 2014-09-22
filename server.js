@@ -116,17 +116,22 @@ io.on("connection", function (socket) {
   });
 
   socket.on("voteSubmitted", function (info) {
+    console.log("hello vote");
     var roomId = info.roomId;
     var username = info.player;
     var imageUrl = info.url;
 
     client.incr(roomId + "votes", function (err, res) {
-      var numPlayers = socketsInRoom(roomId).length;
-      if (res === numPlayers) {
-        console.log("Enough votes!");
-      } else {
-        console.log(res);
-      }
+      console.log(res);
+      client.incr(username + "votes", function (err, votes) {
+        console.log(votes);
+        var numPlayers = socketsInRoom(roomId).length;
+        console.log(numPlayers);
+        if (res === numPlayers) {
+          client.del(roomId + "votes");
+          tallyVotes(roomId);
+        }
+      });
     });
   });
 
@@ -173,4 +178,19 @@ var socketsInRoom = function (roomId) {
     ret.push(io.sockets.adapter.nsp.connected[socketId]);
   }
   return ret;
+};
+
+var tallyVotes = function (roomId) {
+  console.log("Tallying: " + roomId);
+  var sockets = io.sockets.adapter.rooms[roomId];
+
+  client.mget(Object.keys(sockets), function (err, names) {
+    console.log(names);
+    var voteKeys = names.map(function (name) {
+      return name + "votes";
+    });
+    client.mget(voteKeys, function (err, votes) {
+      console.log(votes);
+    });
+  });
 };
